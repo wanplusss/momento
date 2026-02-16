@@ -325,7 +325,7 @@ const GoalCreate: React.FC<GoalCreateProps> = ({ onComplete, onCancel }) => {
     );
 
     return (
-        <div className="container" style={{ maxWidth: 420, paddingTop: '1rem', paddingBottom: '2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div className="container" style={{ maxWidth: 420, paddingBottom: '2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             {/* Header */}
             <div style={{ marginBottom: '1.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>

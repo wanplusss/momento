@@ -116,7 +116,7 @@ select {
   max-width: 480px;
   margin: 0 auto;
   padding: var(--space-6);
-  padding-top: calc(var(--space-6) + env(safe-area-inset-top));
+  padding-top: max(2rem, calc(var(--space-6) + env(safe-area-inset-top, 0px)));
   width: 100%;
 }
 
