@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { Goal, Session } from '../types';
 import GoalCard from './GoalCard';
-import { Plus, LayoutDashboard, PieChart as PieChartIcon } from 'lucide-react';
+import { Plus, LayoutDashboard, PieChart as PieChartIcon, Heart, Coffee, Download } from 'lucide-react';
 import { markRestDay, bankProgress, completeSession } from '../utils/actions';
 import { getDayString, determineTier } from '../utils/calculations';
 import { genId } from '../utils/id';
@@ -16,6 +16,7 @@ interface DashboardProps {
 const Dashboard: React.FC<DashboardProps> = ({ goals, sessions, onNavigate, currentView }) => {
     const [showAddForm, setShowAddForm] = useState(false);
     const [showGovernance, setShowGovernance] = useState(false);
+    const [showSupport, setShowSupport] = useState(false);
     const [showManualEntry, setShowManualEntry] = useState(false);
     const [activeGoalId, setActiveGoalId] = useState<string | null>(null);
 
@@ -150,6 +151,9 @@ const Dashboard: React.FC<DashboardProps> = ({ goals, sessions, onNavigate, curr
             {/* Header */}
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', paddingTop: '0.5rem' }}>
                 <h1 style={{ fontSize: '1.875rem', fontWeight: 700, color: 'white', letterSpacing: '-0.02em' }}>Momento</h1>
+                <button onClick={() => setShowSupport(true)} style={{ color: 'var(--color-text-tertiary)', padding: '0.5rem' }}>
+                    <Heart size={20} />
+                </button>
             </header>
 
             {/* Goal Cards */}
@@ -324,6 +328,52 @@ const Dashboard: React.FC<DashboardProps> = ({ goals, sessions, onNavigate, curr
                             <button onClick={submitGovernance} className="btn" style={{ flex: 1, padding: '0.7rem', borderRadius: 'var(--radius-lg)', background: 'var(--color-brand-500)', color: 'white', fontWeight: 700, textTransform: 'uppercase', fontSize: '0.7rem' }}>Save</button>
                             <button onClick={() => setShowGovernance(false)} className="btn btn-secondary" style={{ padding: '0.7rem 1rem', borderRadius: 'var(--radius-lg)', fontSize: '0.7rem' }}>Cancel</button>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Support Modal */}
+            {showSupport && (
+                <div className="overlay" onClick={() => setShowSupport(false)}>
+                    <div className="modal" onClick={e => e.stopPropagation()} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        {/* Drag handle */}
+                        <div style={{ width: 36, height: 4, borderRadius: 2, background: 'var(--color-border)', margin: '0 auto 0.25rem' }} />
+
+                        <h3 style={{ fontWeight: 700, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>
+                            Support Developer
+                        </h3>
+
+                        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', textAlign: 'center', lineHeight: 1.5 }}>
+                            If you enjoy using Momento, consider supporting its development!
+                        </p>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            <a href="https://ko-fi.com/wanplusss" target="_blank" rel="noreferrer" className="btn" style={{ background: '#29abe0', color: 'white', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.85rem', borderRadius: 'var(--radius-lg)', textDecoration: 'none' }}>
+                                <Coffee size={18} /> Buy me a Coffee
+                            </a>
+
+                            <div style={{ background: 'white', padding: '1rem', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                                <div style={{ width: '100%', aspectRatio: '1/1', background: '#f4f4f5', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-md)', border: '2px solid #e4e4e7', padding: '0.25rem', position: 'relative' }}>
+                                    <img src="/qr.png" alt="DuitNow QR" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 'var(--radius-sm)' }} />
+                                </div>
+                                <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+                                    <button onClick={() => {
+                                        const link = document.createElement('a');
+                                        link.href = '/momento-support.jpeg';
+                                        link.download = 'momento-support.jpeg';
+                                        document.body.appendChild(link);
+                                        link.click();
+                                        document.body.removeChild(link);
+                                    }} className="btn" style={{ flex: 1, padding: '0.5rem', fontSize: '0.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', background: '#18181b', color: 'white', fontWeight: 600, borderRadius: 'var(--radius-md)' }}>
+                                        <Download size={14} /> Save to Photos
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onClick={() => setShowSupport(false)} className="btn btn-secondary" style={{ width: '100%', padding: '0.85rem', borderRadius: 'var(--radius-lg)' }}>
+                            Maybe Later
+                        </button>
                     </div>
                 </div>
             )}
