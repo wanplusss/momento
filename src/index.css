@@ -116,10 +116,9 @@ select {
   max-width: 480px;
   margin: 0 auto;
   padding: var(--space-6);
-  /* iOS 11.0–11.2 fallback */
-  padding-top: max(3rem, calc(var(--space-6) + constant(safe-area-inset-top)));
-  /* iOS 11.2+ & modern browsers */
-  padding-top: max(3rem, calc(var(--space-6) + env(safe-area-inset-top, 0px)));
+  /* Fixed base (3rem ≈ 48px) clears status bar; env() adds notch/Dynamic Island */
+  padding-top: 3rem;
+  padding-top: calc(3rem + env(safe-area-inset-top, 0px));
   width: 100%;
 }
 
