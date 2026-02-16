@@ -1,5 +1,5 @@
 import type { Session, Goal } from '../types';
-import { getGoals, saveGoals, getSessionsByGoalId } from './storage';
+
 import { getDB } from './db';
 import { calculateStreak, autoCalibrate, getDayString } from './calculations';
 

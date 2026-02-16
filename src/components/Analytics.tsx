@@ -17,12 +17,15 @@ const Analytics: React.FC<AnalyticsProps> = ({ goalId, onBack }) => {
     const [sessions, setSessions] = useState<Session[]>([]);
 
     useEffect(() => {
-        const allGoals = getGoals();
-        const found = allGoals.find(g => g.id === goalId);
-        if (found) {
-            setGoal(found);
-            setSessions(getSessionsByGoalId(goalId));
-        }
+        (async () => {
+            const allGoals = await getGoals();
+            const found = allGoals.find((g: Goal) => g.id === goalId);
+            if (found) {
+                setGoal(found);
+                const s = await getSessionsByGoalId(goalId);
+                setSessions(s);
+            }
+        })();
     }, [goalId]);
 
     if (!goal) return <div>Loading analytics...</div>;
