@@ -116,7 +116,10 @@ select {
   max-width: 480px;
   margin: 0 auto;
   padding: var(--space-6);
-  padding-top: max(2rem, calc(var(--space-6) + env(safe-area-inset-top, 0px)));
+  /* iOS 11.0–11.2 fallback */
+  padding-top: max(3rem, calc(var(--space-6) + constant(safe-area-inset-top)));
+  /* iOS 11.2+ & modern browsers */
+  padding-top: max(3rem, calc(var(--space-6) + env(safe-area-inset-top, 0px)));
   width: 100%;
 }
 
