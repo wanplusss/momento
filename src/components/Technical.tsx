@@ -42,7 +42,7 @@ const Technical: React.FC<TechnicalProps> = ({ goal, sessions, onBack }) => {
     const maxHigh = haData.length ? Math.max(...haData.map(h => h.high)) : 100;
 
     return (
-        <div className="container animate-fade-in" style={{ minHeight: '100vh', paddingBottom: '6rem', paddingTop: 'calc(1rem + env(safe-area-inset-top))' }}>
+        <div className="container animate-fade-in" style={{ minHeight: '100vh', paddingBottom: '6rem' }}>
             <header style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
                 <button onClick={onBack} className="btn-icon" style={{ background: 'var(--color-surface)', padding: '0.5rem', borderRadius: '0.5rem' }}>
                     <ChevronLeft size={20} />
