@@ -344,7 +344,7 @@ const Dashboard: React.FC<DashboardProps> = ({ goals, sessions, onNavigate, curr
                         </h3>
 
                         <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', textAlign: 'center', lineHeight: 1.5 }}>
-                            I'm a broke solo developer. If you enjoy using Momento, please consider supporting me!
+                            If you enjoy using Momento, please consider supporting a solo developer like me!
                         </p>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
